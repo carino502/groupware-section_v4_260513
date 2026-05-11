@@ -21,135 +21,307 @@ a { text-decoration: none; color: inherit; }
 .site-img { width:100%; display:block; line-height:0; font-size:0; }
 .site-img img { width:100%; display:block; }
 
-/* ══════════════════════════════════════
-   그룹웨어 섹션 — 템플릿 정밀 재현
-   섹션 배경: #f9faff (실측)
-══════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   그룹웨어 섹션 — Notion / Linear / Slack 풍 리디자인
+   브랜드 컬러: #0055a4
+══════════════════════════════════════════════════════ */
 .gw-section {
-  background: #f9faff;
-  padding: 50px 0 50px;
-  border-top: 1px solid #e8eaf2;
-  border-bottom: 1px solid #e8eaf2;
+  position: relative;
+  background: #0a1730;
+  color: #fff;
+  padding: 120px 0 130px;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: 'Pretendard','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
 }
+
+/* 메시 그라데이션 글로우 */
+.gw-bg-mesh {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.gw-bg-mesh::before {
+  content: '';
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,85,164,0.45) 0%, rgba(0,85,164,0) 65%);
+  top: -300px; left: -200px;
+  filter: blur(20px);
+}
+.gw-bg-mesh::after {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,67,212,0.30) 0%, rgba(108,67,212,0) 65%);
+  bottom: -200px; right: -200px;
+  filter: blur(20px);
+}
+/* 그리드 라인 패턴 */
+.gw-bg-grid {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+/* 우상단 노이즈 점 */
+.gw-bg-dots {
+  position: absolute;
+  top: 80px; right: 120px;
+  width: 200px; height: 200px;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .gw-inner {
-  width: 1126px;
+  position: relative;
+  z-index: 1;
+  width: 1200px;
+  max-width: calc(100% - 48px);
   margin: 0 auto;
 }
 
 /* ── 헤더 ── */
 .gw-head {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 72px;
 }
-/* ① 서브카피: 크기 키우고 간격 넓힘 */
 .gw-sub {
-  font-size: 18px;
-  font-weight: 400;
-  color: #64748b;
+  font-size: 17px;
+  font-weight: 500;
+  color: #9eb2cf;
   letter-spacing: -0.01em;
   line-height: 1.6;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
-/* ② 메인카피: 변경된 문구 */
 .gw-main {
-  font-size: 36px;
+  font-size: 44px;
   font-weight: 800;
-  color: #0f172a;
-  letter-spacing: -0.04em;
-  line-height: 1.35;
+  color: #fff;
+  letter-spacing: -0.045em;
+  line-height: 1.22;
   white-space: nowrap;
 }
-.gw-main .c1 { color: #0055a4; }
-.gw-main .c2 { color: #0055a4; }
+.gw-main .c1 {
+  background: linear-gradient(135deg, #4ea2ff 0%, #8bc8ff 50%, #c7a7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gw-main .c2 {
+  background: linear-gradient(135deg, #4ea2ff 0%, #8bc8ff 50%, #c7a7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .gw-line {
-  width: 44px; height: 3px;
-  background: linear-gradient(90deg, #0055a4, #29abe2);
+  width: 56px; height: 4px;
+  background: linear-gradient(90deg, #0055a4, #4ea2ff, #c7a7ff);
   border-radius: 99px;
-  margin: 18px auto 0;
+  margin: 26px auto 0;
+  box-shadow: 0 0 20px rgba(78,162,255,0.5);
 }
 
-/* ── 카드 그리드: 4열 (템플릿 기준) ── */
+/* ── 카드 그리드 ── */
 .gw-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
-/* 카드 — 템플릿 정밀 재현
-   - 흰색 배경
-   - 연한 회색 전체 border
-   - 상단 컬러 두꺼운 border (앱별 컬러)
-   - 둥근 모서리 */
+/* ── 카드 ── */
 .gw-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
   background: #fff;
-  border: 1px solid #e2e4ed;
-  border-top: 4px solid var(--ac, #0055a4);
-  border-radius: 14px;
-  padding: 24px 22px 22px;
+  border: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  transition: transform 0.2s, box-shadow 0.2s;
+  align-items: stretch;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08),
+              0 20px 60px rgba(0,0,0,0.35),
+              0 6px 18px rgba(0,0,0,0.2);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.35s ease;
 }
 .gw-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 32px rgba(0,0,0,0.10);
+  transform: translateY(-8px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.1),
+              0 32px 80px rgba(0,0,0,0.45),
+              0 12px 28px rgba(0,0,0,0.25);
 }
 
-/* 아이콘 — 연한 컬러 원형 배경 */
-.gw-icon {
-  width: 56px; height: 56px;
-  border-radius: 14px;
+/* 카드 상단 — 그라데이션 비주얼 영역 */
+.gw-visual {
+  position: relative;
+  height: 168px;
+  background: linear-gradient(135deg, var(--ac1, #0055a4) 0%, var(--ac2, #2a8de0) 100%);
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px;
-  flex-shrink: 0;
+  overflow: hidden;
 }
-.gw-icon svg { width: 28px; height: 28px; }
+.gw-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.18) 1px, transparent 0);
+  background-size: 18px 18px;
+  opacity: 0.5;
+}
+.gw-visual::after {
+  content: '';
+  position: absolute;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 60%);
+  top: -80px; right: -60px;
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+.gw-card:hover .gw-visual::after {
+  transform: scale(1.3) translate(-10px, 10px);
+}
 
-/* 앱명 */
+/* 큰 아이콘 */
+.gw-icon {
+  position: relative;
+  z-index: 1;
+  width: 88px; height: 88px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.28);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18),
+              inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.gw-card:hover .gw-icon {
+  transform: scale(1.08) rotate(-3deg);
+}
+.gw-icon svg { width: 44px; height: 44px; display: block; color: #fff; }
+
+/* 좌상단 태그 */
+.gw-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 5px 11px 5px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.gw-tag-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.85;
+}
+
+/* 카드 하단 — 컨텐츠 영역 */
+.gw-body {
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .gw-appname {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
-  color: #0f172a;
-  letter-spacing: -0.03em;
-  margin-bottom: 14px;
+  color: #0c1a2e;
+  letter-spacing: -0.035em;
+  margin-bottom: 10px;
 }
-
-/* tagline — 앱별 컬러, 2줄 */
-
-
-/* ③ 설명 문구 — PPT 지침 반영 */
 .gw-desc {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 400;
-  color: #475569;
-  line-height: 1.78;
+  color: #5a6b86;
+  line-height: 1.7;
   letter-spacing: -0.01em;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   flex: 1;
   word-break: keep-all;
+}
+.gw-desc b {
+  color: #1a2a44;
+  font-weight: 700;
 }
 
 /* 자세히 보기 */
 .gw-more {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--ac, #0055a4);
+  color: var(--ac1, #0055a4);
   letter-spacing: -0.01em;
-  border-bottom: 1.5px solid transparent;
-  padding-bottom: 1px;
-  transition: border-color 0.15s, gap 0.15s;
+  align-self: flex-start;
+  padding: 8px 14px 8px 16px;
+  background: color-mix(in srgb, var(--ac1, #0055a4) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--ac1, #0055a4) 18%, #fff);
+  border-radius: 99px;
+  transition: gap 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
-.gw-more:hover {
-  border-bottom-color: var(--ac, #0055a4);
-  gap: 7px;
+.gw-more::after {
+  content: '→';
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.25s ease;
 }
-.gw-more::after { content: ' →'; font-size: 14px; }
+.gw-card:hover .gw-more {
+  gap: 12px;
+  background: var(--ac1, #0055a4);
+  color: #fff;
+  border-color: var(--ac1, #0055a4);
+}
+.gw-card:hover .gw-more::after {
+  transform: translateX(3px);
+}
+
+/* ── 반응형 ── */
+@media (max-width: 1280px) {
+  .gw-main { font-size: 38px; }
+}
+@media (max-width: 1024px) {
+  .gw-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .gw-main { font-size: 32px; white-space: normal; }
+  .gw-section { padding: 88px 0 96px; }
+}
+@media (max-width: 600px) {
+  .gw-grid { grid-template-columns: 1fr; }
+  .gw-main { font-size: 24px; }
+  .gw-visual { height: 144px; }
+  .gw-icon { width: 76px; height: 76px; }
+  .gw-icon svg { width: 38px; height: 38px; }
+}
 </style>
+
+<!-- Pretendard 폰트 (그룹웨어 섹션용) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <!-- MY인사 상세페이지 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -563,10 +735,14 @@ footer {background:var(--bluedeep);padding:30px 40px;display:flex;align-items:ce
 
 <!-- ★ 그룹웨어 섹션 -->
 <section class="gw-section">
+  <div class="gw-bg-mesh"></div>
+  <div class="gw-bg-grid"></div>
+  <div class="gw-bg-dots"></div>
+
   <div class="gw-inner">
 
     <div class="gw-head">
-      <p class="gw-sub">경리프로그램 따로, 그룹웨어 따로 사용하시나요 ?</p>
+      <p class="gw-sub">경리프로그램 따로, 그룹웨어 따로 사용하시나요?</p>
       <h2 class="gw-main">
         경리나라에서 <span class="c1">놀랍도록 편리한 그룹웨어까지</span> 함께 만나보세요
       </h2>
@@ -575,81 +751,97 @@ footer {background:var(--bluedeep);padding:30px 40px;display:flex;align-items:ce
 
     <div class="gw-grid">
 
-      <!-- My 인사 — 파랑 #0055a4 -->
-      <div class="gw-card" style="--ac:#0055a4;">
-        <div class="gw-icon" style="background:#deeeff;">
-          <svg viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="11" r="5" fill="#0055a4" opacity="0.2"/>
-            <circle cx="18" cy="11" r="3.8" fill="#0055a4"/>
-            <path d="M7 29c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0055a4" stroke-width="2.2" stroke-linecap="round"/>
-            <rect x="22" y="7.5" width="9" height="1.8" rx="0.9" fill="#29abe2"/>
-            <rect x="22" y="11" width="6.5" height="1.8" rx="0.9" fill="#29abe2"/>
-          </svg>
+      <!-- My 인사 — 브랜드 블루 -->
+      <div class="gw-card" style="--ac1:#0055a4; --ac2:#2a8de0;">
+        <div class="gw-visual">
+          <div class="gw-tag"><span class="gw-tag-dot"></span>HR · 셀프서비스</div>
+          <div class="gw-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="18" cy="16" r="6.5" stroke="currentColor" stroke-width="2.5"></circle>
+              <path d="M6 38c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <rect x="30" y="12" width="13" height="2.4" rx="1.2" fill="currentColor"></rect>
+              <rect x="30" y="17.5" width="9" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <rect x="30" y="23" width="11" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <circle cx="38" cy="34" r="5.5" stroke="currentColor" stroke-width="2.5" fill="none"></circle>
+              <path d="M35.5 34l1.8 1.8 3.4-3.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
         </div>
-        <div class="gw-appname">My 인사</div>
-        <div class="gw-desc">
-          <strong style="color:#0055a4;">연차 신청, 잔여일 조회, 재직증명서</strong><br>
-          <strong style="color:#0055a4;">발급이 너무 편리해 집니다.</strong>
+        <div class="gw-body">
+          <div class="gw-appname">My 인사</div>
+          <div class="gw-desc">
+            <b>연차 신청, 잔여일 조회, 재직증명서</b> 발급이 너무 편리해 집니다.
+          </div>
+          <a href="#myhr" class="gw-more" id="myhr-more-btn">자세히 보기</a>
         </div>
-        <a href="#myhr" class="gw-more" id="myhr-more-btn">자세히 보기</a>
       </div>
 
-      <!-- 전자결재 — 초록 #1a8a3c -->
-      <div class="gw-card" style="--ac:#1a8a3c;">
-        <div class="gw-icon" style="background:#d4f0e0;">
-          <svg viewBox="0 0 36 36" fill="none">
-            <rect x="8" y="4" width="20" height="26" rx="3" fill="#d4f0e0" stroke="#1a8a3c" stroke-width="1.8"/>
-            <rect x="12" y="10" width="12" height="2" rx="1" fill="#1a8a3c"/>
-            <rect x="12" y="14.5" width="9" height="2" rx="1" fill="#1a8a3c" opacity="0.5"/>
-            <path d="M11 21.5l2.8 2.8 5.5-5.5" stroke="#1a8a3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <!-- 전자결재 — 에메랄드 -->
+      <div class="gw-card" style="--ac1:#0e8a6e; --ac2:#22c08a;">
+        <div class="gw-visual">
+          <div class="gw-tag"><span class="gw-tag-dot"></span>APPROVAL · 결재 프로세스</div>
+          <div class="gw-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="9" y="6" width="26" height="34" rx="3.5" stroke="currentColor" stroke-width="2.5" fill="none"></rect>
+              <rect x="14" y="13" width="16" height="2.4" rx="1.2" fill="currentColor"></rect>
+              <rect x="14" y="19" width="12" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <rect x="14" y="25" width="14" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <path d="M13 32l4 4 8-8" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
         </div>
-        <div class="gw-appname">전자결재</div>
-        <div class="gw-desc">
-          <strong style="color:#0055a4;">휴가 신청부터 대금이체까지 품의서</strong><br>
-          <strong style="color:#0055a4;">업무가 획기적으로 개선됩니다.</strong>
+        <div class="gw-body">
+          <div class="gw-appname">전자결재</div>
+          <div class="gw-desc">
+            <b>휴가 신청부터 대금이체까지 품의서</b> 업무가 획기적으로 개선됩니다.
+          </div>
+          <a href="#" class="gw-more">자세히 보기</a>
         </div>
-        <a href="#" class="gw-more">자세히 보기</a>
       </div>
 
-      <!-- 게시판 — 오렌지 #d4680a -->
-      <div class="gw-card" style="--ac:#d4680a;">
-        <div class="gw-icon" style="background:#fde8c8;">
-          <svg viewBox="0 0 36 36" fill="none">
-            <rect x="5" y="5" width="26" height="26" rx="3.5" fill="#fde8c8" stroke="#d4680a" stroke-width="1.8"/>
-            <rect x="9" y="10" width="18" height="2.2" rx="1.1" fill="#d4680a"/>
-            <rect x="9" y="15" width="13" height="2" rx="1" fill="#d4680a" opacity="0.55"/>
-            <rect x="9" y="19.5" width="10" height="2" rx="1" fill="#d4680a" opacity="0.35"/>
-            <circle cx="27" cy="9" r="4" fill="#d4680a"/>
-            <path d="M25.5 9h3M27 7.5v3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+      <!-- 게시판 — 앰버 -->
+      <div class="gw-card" style="--ac1:#c5680f; --ac2:#f59e0b;">
+        <div class="gw-visual">
+          <div class="gw-tag"><span class="gw-tag-dot"></span>BOARD · 사내 소통</div>
+          <div class="gw-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="9" width="36" height="28" rx="3.5" stroke="currentColor" stroke-width="2.5" fill="none"></rect>
+              <rect x="11" y="15" width="20" height="2.4" rx="1.2" fill="currentColor"></rect>
+              <rect x="11" y="21" width="26" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <rect x="11" y="27" width="16" height="2.4" rx="1.2" fill="currentColor" opacity="0.6"></rect>
+              <circle cx="38" cy="11" r="5.5" fill="currentColor"></circle>
+              <text x="38" y="14.2" text-anchor="middle" font-size="9" font-weight="900" fill="#c5680f" font-family="Pretendard, sans-serif">!</text>
+            </svg>
+          </div>
         </div>
-        <div class="gw-appname">게시판</div>
-        <div class="gw-desc">
-          <strong style="color:#0055a4;">공지사항, 업무 지시부터 피드백까지</strong><br>
-          <strong style="color:#0055a4;">게시판에서 한번에 하세요.</strong>
+        <div class="gw-body">
+          <div class="gw-appname">게시판</div>
+          <div class="gw-desc">
+            <b>공지사항, 업무 지시부터 피드백까지</b> 게시판에서 한번에 하세요.
+          </div>
+          <a href="#" class="gw-more">자세히 보기</a>
         </div>
-        <a href="#" class="gw-more">자세히 보기</a>
       </div>
 
-      <!-- 결재함 — 보라 #6c30d4 -->
-      <div class="gw-card" style="--ac:#6c30d4;">
-        <div class="gw-icon" style="background:#ede0ff;">
-          <svg viewBox="0 0 36 36" fill="none">
-            <rect x="5" y="5" width="26" height="26" rx="3.5" fill="#ede0ff" stroke="#6c30d4" stroke-width="1.8"/>
-            <rect x="9" y="11" width="16" height="1.8" rx="0.9" fill="#6c30d4" opacity="0.3"/>
-            <rect x="9" y="15.5" width="12" height="1.8" rx="0.9" fill="#6c30d4" opacity="0.3"/>
-            <rect x="9" y="19.5" width="9" height="1.8" rx="0.9" fill="#6c30d4" opacity="0.3"/>
-            <circle cx="26" cy="25" r="5" fill="#6c30d4"/>
-            <path d="M23.8 25l1.8 1.8 3.2-3.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <!-- 결재함 — 바이올렛 -->
+      <div class="gw-card" style="--ac1:#6c43d4; --ac2:#a855f7;">
+        <div class="gw-visual">
+          <div class="gw-tag"><span class="gw-tag-dot"></span>INBOX · 결재 이력</div>
+          <div class="gw-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M6 24l4-14h28l4 14" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="none"></path>
+              <path d="M6 24v12a3 3 0 003 3h30a3 3 0 003-3V24h-11l-3 4h-8l-3-4H6z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="none"></path>
+              <path d="M18 16l3.5 3.5 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
         </div>
-        <div class="gw-appname">결재함</div>
-        <div class="gw-desc">
-          <strong style="color:#0055a4;">누락없는 결재와 결재이력 관리까지</strong><br>
-          <strong style="color:#0055a4;">한번에 할 수 있어요.</strong>
+        <div class="gw-body">
+          <div class="gw-appname">결재함</div>
+          <div class="gw-desc">
+            <b>누락없는 결재와 결재이력 관리까지</b> 한번에 할 수 있어요.
+          </div>
+          <a href="#" class="gw-more">자세히 보기</a>
         </div>
-        <a href="#" class="gw-more">자세히 보기</a>
       </div>
 
     </div>
